@@ -1,0 +1,31 @@
+{
+  "name": "101489064_comp3123-exec05",
+  "version": "1.0.0",
+  "description": "Using the express framework to set up the server",
+  "keywords": [
+    "express",
+    "middleware",
+    "logging"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdoiseO/101489064_COMP3123-exec05.git"
+  },
+  "license": "ISC",
+  "author": "Phillip Onofua",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js",
+    "start:lab": "nodemon ./server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

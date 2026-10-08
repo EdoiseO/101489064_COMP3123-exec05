@@ -1,0 +1,252 @@
+{
+  "info": {
+    "name": "101489064_COMP3123-exec05",
+    "description": "Phillip Onofua | 101489064. Local Exercise 5 requests and expected responses; importing a collection does not mean its requests have been run.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Home page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/home"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"Welcome to ExpressJs Tutorial\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complete profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/user/profile"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Complete profile\", () => { const user = pm.response.json(); pm.expect(user.username).to.eql(\"bret\"); pm.expect(user.address.geo.lat).to.eql(\"-37.3159\"); pm.expect(user.company.name).to.eql(\"Romaguera-Crona\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Valid login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/user/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"bret\",\n  \"password\": \"bret@123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"User Is valid\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid username",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/user/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"wrong-user\",\n  \"password\": \"bret@123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"User Name is invalid\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid password",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/user/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"bret\",\n  \"password\": \"wrong-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"Password is invalid\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Logout query parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/user/logout?username=bret"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"<b>bret successfully logged out.</b>\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Logout path parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/user/logout/bret"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"<b>bret successfully logged out.</b>\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing logout username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/user/logout"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"Username is required\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Malformed JSON error",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/user/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 500\", () => pm.response.to.have.status(500));",
+              "pm.test(\"Expected response\", () => pm.expect(pm.response.text()).to.include(\"Server Error\"));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
