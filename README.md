@@ -46,5 +46,16 @@ is separate from the user-API exercise and has not been replaced.
 
 The exercise ZIP excludes `node_modules` and generated logs. Written answers
 are in `answers.md`, reusable requests are in `exercise5.postman_collection.json`,
-and genuine screenshots are in `evidence/`. MongoDB Atlas account evidence must
-show the actual signed-in account; the local sample login is not Atlas evidence.
+and genuine screenshots are in `evidence/`.
+
+- `evidence/2026-10-08-exercise-postman/`: seven Postman captures showing valid
+  login, invalid username/password, logout, HTTP 500, and overlapping upper/lower
+  views of the complete profile response.
+- `evidence/2026-10-07-postman/`: four Postman captures of the separate
+  books/computers logging walkthrough.
+
+The native Postman captures retain their original filenames and bytes. Their
+`.png` filenames contain JPEG image data; no screenshot content was changed.
+The separate submission screenshot PDF includes these captures, the browser
+login/logout evidence, and the genuine signed-in MongoDB Atlas overview.
+The local sample login is not Atlas evidence.
