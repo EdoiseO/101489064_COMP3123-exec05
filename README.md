@@ -44,9 +44,9 @@ is separate from the user-API exercise and has not been replaced.
 
 ## Submission materials
 
-The exercise ZIP excludes `node_modules` and generated logs. Written answers
-are in `answers.md`, reusable requests are in `exercise5.postman_collection.json`,
-and genuine screenshots are in `evidence/`.
+The exercise ZIP excludes `node_modules`, generated logs and Q&A material.
+Reusable requests are in `exercise5.postman_collection.json`, and genuine
+screenshots are in `evidence/`. This README is the only Markdown file included.
 
 - `evidence/2026-10-08-exercise-postman/`: seven Postman captures showing valid
   login, invalid username/password, logout, HTTP 500, and overlapping upper/lower
