@@ -38,12 +38,3 @@ The handler returns HTTP 500 with `Server Error`, as required by this exercise. 
 
 The submitted test suite checks the 500 handler by sending malformed JSON to `/api/v1/user/login`. The JSON parser rejects the request and forwards its error to this handler.
 
-## Section C, Bonus Question 7: Dynamic port binding
-
-```javascript
-app.listen(process.env.port || 8081);
-```
-
-`process.env.port` reads the environment variable named `port`. If it contains a truthy value, that port is used; otherwise `8081` is the fallback for local development. This allows the same code to run on different ports without editing the source file, which is useful when a deployment environment assigns the listening port.
-
-Environment-variable names are case-sensitive on Unix systems. Many hosting platforms use uppercase `PORT`; their variable name must match the code. This exercise retains the given lowercase `port`. On this Mac, `port=8082 npm start` demonstrates an alternate port.
